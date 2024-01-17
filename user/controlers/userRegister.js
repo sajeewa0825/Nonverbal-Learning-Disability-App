@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const jwtManager = require('../../manager/jwt');
 const bcrypt = require('bcrypt');
+const sendMail = require('../../manager/email');
 
 const userRegister = async (req, res) => {
     //console.log(req.body);
@@ -34,9 +35,12 @@ const userRegister = async (req, res) => {
 
         const accessToken = jwtManager(newUser);
 
+        const email = await sendMail(email, "Welcome to our website", "Welcome to our website");
+
         res.status(200).json({
             status: "success",
             message: "User registered successfully",
+            email: email,
             data: {
                 user: newUser,
                 accessToken: accessToken
