@@ -35,12 +35,13 @@ const userRegister = async (req, res) => {
 
         const accessToken = jwtManager(newUser);
 
-        const email = await sendMail(email, "Welcome to our website", "Welcome to our website");
+        const emailResponse = await sendMail(email, "Your Registration successfully", "Thank you for registering with us" );
+        console.log(emailResponse);
 
         res.status(200).json({
             status: "success",
             message: "User registered successfully",
-            email: email,
+            email: emailResponse,
             data: {
                 user: newUser,
                 accessToken: accessToken

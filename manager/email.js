@@ -1,32 +1,26 @@
 const nodemailer = require("nodemailer")
 require('dotenv').config();
 
-const sendMail = async (to, subject, text) =>{
-    console.log(process.env.EMAIL);
-    console.log(to)
-    console.log(subject)
-    console.log(text)
+const sendMail = async (to, subject, text) => {
+
     var transport = nodemailer.createTransport({
         service: "gmail",
         auth: {
-          user: process.env.EMAIL,
-          pass: process.env.EMAIL_PW
+            user: process.env.EMAIL,
+            pass: process.env.EMAIL_PW
         }
-      });
+    });
 
     await transport.sendMail({
-        to:to,
-        from:process.env.EMAIL,
-        text:text,
-        subject:subject
+        to: to,
+        from: process.env.EMAIL,
+        text: text,
+        subject: subject
     }).then((res) => {
-        res.satus(200).json({
-            message:"Email sent successfully"
-        })
+        console.log(res);
+
     }).catch((err) => {
-        res.status(500).json({
-            message:"Email not send, Internal Server Error"
-        })
+        console.log(err);
     });
 }
 
