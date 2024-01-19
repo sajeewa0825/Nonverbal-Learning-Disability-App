@@ -15,6 +15,7 @@ mongoose.connect(process.env.MONGO_DB_URL,{}).then(((res) => {
 
 // Models
 require('./model/userModel');
+require('./model/tokenModel');
 
 // Middlewares
 app.use(express.json());
