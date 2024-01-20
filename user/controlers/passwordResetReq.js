@@ -19,34 +19,43 @@ const passwordResetReq = async (req, res) => {
             message: "User does not exist"
         });
     }
-
     const tokenModel = mongoose.model("resettoken");
+    const datareset = await tokenModel.findOne({ email: email });
+    if (datareset) {
+        const query = { _id: datareset._id };
+        await tokenModel.deleteOne(query);
+    }
 
-    let resetToken = crypto.randomBytes(32).toString("hex");
-    const expirationTime = Math.floor(Date.now() / 1000) + (3 * 60);
-    const jwtToken = jwt.sign({ resetToken, exp: expirationTime }, process.env.JWT_SECRET);
-    const hash = await bcrypt.hash(jwtToken, 10);
+    //let resetToken = crypto.randomBytes(32).toString("hex");
+    // const expirationTime = Math.floor(Date.now() / 1000) + (3 * 60);
+    // const jwtToken = jwt.sign({ resetToken, exp: expirationTime }, process.env.JWT_SECRET);
+    const randomDecimal = Math.random() * 90000;
+    const resetcode = Math.floor(randomDecimal) + 10000;
+    const code = resetcode.toString()
+    const hash = await bcrypt.hash(code, 10);
 
 
     const newUser = await tokenModel.create({
-        userId: user._id,
+        email: user.email,
         token: hash,
         createdAt: Date.now(),
     });
 
 
-    const link = `http://localhost:3000/user/passwordreset?token=${resetToken}&id=${user._id}`;
-    const emaildata = sendMail(user.email, "Password Reset Request", link);
+    //const link = `http://localhost:3000/user/passwordreset?token=${resetToken}&id=${user._id}`;
+    const message = "Use your secret code! " + resetcode + "  If you did not forget your password, you can ignore this email.";
 
-    if(emaildata){
+    const emaildata = sendMail(user.email, "NVLD App Password reset code", message);
+
+    if (emaildata) {
         res.status(200).json({
             status: "success",
             message: "Email sent successfully",
             data: {
-                linkr: link,
+                Code: resetcode,
             }
         });
-    
+
     }
 
 };

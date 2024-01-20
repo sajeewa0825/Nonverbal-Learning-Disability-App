@@ -2,8 +2,8 @@ const mongoose = require("mongoose");
 
 const tokenSchema = new mongoose.Schema({
 
-  userId: {
-    type: mongoose.Schema.Types.ObjectId,
+  email: {
+    type: String,
     required: true,
   },
   token: {
@@ -13,7 +13,7 @@ const tokenSchema = new mongoose.Schema({
   createdAt: {
     type: Date,
     default: Date.now,
-    expires: '1m',
+    expires: '3m',
   },
 });
 

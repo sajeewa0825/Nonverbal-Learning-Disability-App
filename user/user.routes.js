@@ -7,7 +7,7 @@ const passwordReset = require('./controlers/passwordReset');
 
 userRouter.post('/register',userRegister)
 userRouter.post('/login',userLogin)
-userRouter.post('/resetpassword',passwordResetReq) 
+userRouter.post('/passwordresetreq',passwordResetReq) 
 userRouter.post('/passwordreset',passwordReset)
 
 module.exports = userRouter;
