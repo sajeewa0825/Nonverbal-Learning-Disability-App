@@ -4,8 +4,14 @@ const userRegister = require('./controlers/userRegister');
 const userLogin = require('./controlers/userLogin');
 const passwordResetReq = require('./controlers/passwordResetReq');
 const passwordReset = require('./controlers/passwordReset');
+const multer = require('multer');
 
-userRouter.post('/register',userRegister)
+
+const upload = multer({
+  dest: 'uploads/'
+}); // multer configuration
+
+userRouter.post('/register', upload.any(), userRegister)
 userRouter.post('/login',userLogin)
 userRouter.post('/passwordresetreq',passwordResetReq) 
 userRouter.post('/passwordreset',passwordReset)

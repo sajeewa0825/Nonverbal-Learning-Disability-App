@@ -4,6 +4,7 @@ const bcrypt = require('bcrypt');
 
 const userLogin = async (req, res) => {
     const { email, password } = req.body;
+    console.log(req.body);
     const userModel = mongoose.model("user");
 
     if (!email || !password) {

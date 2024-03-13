@@ -22,6 +22,10 @@ const userSchema= new mongoose.Schema({
         required:true, 
     },
 
+    profilePhoto: {
+        data: Buffer,
+        contentType: String
+      },
 
     resetCode:{
         type:Number
