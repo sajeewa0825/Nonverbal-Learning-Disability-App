@@ -2,9 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const userRouter = require('./user/user.routes');
 const cors = require('cors');
-const multer = require('multer');
-const path = require('path');
-const bodyParser = require('body-parser')
+require('dotenv').config();
 
 const app = express();
 app.use(cors());
