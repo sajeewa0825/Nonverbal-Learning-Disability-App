@@ -11,7 +11,7 @@ const upload = multer({
   dest: 'uploads/'
 }); // multer configuration
 
-userRouter.post('/register', upload.any(), userRegister)
+userRouter.post('/register',userRegister)
 userRouter.post('/login',userLogin)
 userRouter.post('/passwordresetreq',passwordResetReq) 
 userRouter.post('/passwordreset',passwordReset)

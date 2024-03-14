@@ -1,12 +1,7 @@
 const mongoose = require('mongoose')
 
 const userSchema= new mongoose.Schema({
-    Fname:{
-        type:String,
-        required:true,
-    },
-
-    Lname:{
+    name:{
         type:String,
         required:true,
     },
@@ -21,11 +16,6 @@ const userSchema= new mongoose.Schema({
         type:String,
         required:true, 
     },
-
-    profilePhoto: {
-        data: Buffer,
-        contentType: String
-      },
 
     resetCode:{
         type:Number
