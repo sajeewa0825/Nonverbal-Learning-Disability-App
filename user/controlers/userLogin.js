@@ -32,11 +32,11 @@ const userLogin = async (req, res) => {
         }
 
         const accessToken = jwtManager(user);
-
+        console.log(user);
         const _data = {
-            Fname: user.Fname,
-            Lname: user.Lname,
+            name: user.name,
             email: user.email,
+            _id: user._id
         }
 
         res.status(200).json({
